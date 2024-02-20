@@ -23,9 +23,6 @@ jobs:
     using: 'composite'
     steps:
       - uses: actions/github-script@v7
-        env:
-          BOT_TOKEN: ${{ inputs.bot_token }}
-          USER_ID: ${{ inputs.user_id }}
         with:
           script: |
             const botToken = core.getInput('bot_token')
