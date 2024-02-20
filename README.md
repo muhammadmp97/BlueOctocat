@@ -1,4 +1,4 @@
-# GithubTelegramNotifier
+# Blue Octocat
 Do you want to receive Telegram notifications, when your repository gets new issues/PRs?
 
 ## How to use
