@@ -10,6 +10,12 @@ on:
     types: [opened]
   issues:
     types: [opened]
+  workflow_call:
+    secrets:
+      BOT_TOKEN:
+        required: true
+      USER_ID:
+        required: true
 
 jobs:
   notify:
