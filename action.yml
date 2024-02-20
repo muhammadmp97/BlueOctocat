@@ -2,6 +2,9 @@ name: 'Blue Octocat'
 description: 'Github action for getting Telegram notifications'
 author: 'MuhammadMP97'
 
+branding:
+  color: 'blue'
+
 on:
   pull_request:
     types: [opened]
