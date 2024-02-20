@@ -1,5 +1,5 @@
-import core from '@actions/core';
-import github from '@actions/github';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 const botToken = core.getInput('bot_token');
 const userId = core.getInput('user_id');
