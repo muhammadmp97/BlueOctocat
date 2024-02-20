@@ -10,12 +10,12 @@ on:
     types: [opened]
   issues:
     types: [opened]
-  workflow_call:
-    secrets:
-      BOT_TOKEN:
-        required: true
-      USER_ID:
-        required: true
+
+inputs:
+  bot_token:
+    required: true
+  user_id:
+    required: true
 
 jobs:
   notify:
@@ -23,8 +23,8 @@ jobs:
     steps:
       - uses: actions/github-script@v7
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          USER_ID: ${{ secrets.USER_ID }}
+          BOT_TOKEN: ${{ inputs.bot_token }}
+          USER_ID: ${{ inputs.user_id }}
         with:
           script: |
             if (!process.env.BOT_TOKEN) {
