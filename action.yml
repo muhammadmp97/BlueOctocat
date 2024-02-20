@@ -1,0 +1,45 @@
+name: 'Github Telegram Notifier'
+
+on:
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          USER_ID: ${{ secrets.USER_ID }}
+        with:
+          script: |
+            if (!process.env.BOT_TOKEN) {
+              return core.setFailed('BOT_TOKEN is not defined!');
+            }
+
+            if (!process.env.USER_ID) {
+              return core.setFailed('USER_ID is not defined!');
+            }
+          
+            const subject = context.payload.pull_request ?? context.payload.issue;
+
+            const type = context.payload.pull_request ? 'pull request' : 'issue';
+            const text = `🙋‍♂️ A new <b>${type}</b> by <b>${subject.user.login}</b>:\n<a href="${subject.html_url}">${subject.title}</a>`;
+
+            const response = await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                text: text,
+                chat_id: process.env.USER_ID,
+                parse_mode: 'html'
+              })
+            });
+
+            if (!response.ok) {
+              const jsonResponse = await response.json();
+              core.setFailed(jsonResponse);
+            }
