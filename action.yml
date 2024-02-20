@@ -1,4 +1,6 @@
-name: 'Github Telegram Notifier'
+name: 'Blue Octocat'
+description: 'Github action for getting Telegram notifications'
+author: 'MuhammadMP97'
 
 on:
   pull_request:
