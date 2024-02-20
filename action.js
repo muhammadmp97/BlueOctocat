@@ -1,15 +1,15 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+import core from '@actions/core';
+import github from '@actions/github';
 
 const botToken = core.getInput('bot_token');
 const userId = core.getInput('user_id');
 
 if (!botToken) {
-  return core.setFailed('BOT_TOKEN is not defined!');
+  core.setFailed('BOT_TOKEN is not defined!');
 }
 
 if (!userId) {
-  return core.setFailed('USER_ID is not defined!');
+  core.setFailed('USER_ID is not defined!');
 }
 
 const subject = github.context.payload.pull_request ?? github.context.payload.issue;
