@@ -20,7 +20,6 @@ inputs:
 jobs:
   notify:
     runs-on: ubuntu-latest
-    using: 'composite'
     steps:
       - uses: actions/github-script@v7
         with:
